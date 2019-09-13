@@ -1,0 +1,19 @@
+apiVersion: 1
+
+datasources:
+- name: PCP Vector
+  type: pcp-vector-datasource
+  access: proxy
+  orgId: 1
+  url: http://localhost:44323
+  isDefault: true
+- name: PCP Redis
+  type: pcp-redis-datasource
+  access: proxy
+  orgId: 1
+  url: http://localhost:44322
+- name: PCP bpftrace
+  type: pcp-bpftrace-datasource
+  access: proxy
+  orgId: 1
+  url: http://localhost:44323

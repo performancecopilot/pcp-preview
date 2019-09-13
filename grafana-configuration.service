@@ -1,0 +1,14 @@
+[Unit]
+Description=Configure Grafana
+Require=grafana-server.service
+After=grafana-server.service
+
+[Service]
+Type=oneshot
+ExecStart=curl -v \
+          -H "Content-Type: application/json" \
+          -d '{"enabled":true,"pinned":true,"jsonData":null}' \
+          "http://admin:admin@localhost:3000/api/plugins/performancecopilot-pcp-app/settings"
+
+[Install]
+WantedBy=multi-user.target
