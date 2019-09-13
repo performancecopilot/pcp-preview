@@ -10,14 +10,14 @@ It includes the following components:
 
 # Run container using podman
 ```
-sudo podman run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -p 3000:3000 pcp-preview
+sudo podman run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -p 3000:3000 quay.io/performancecopilot/pcp-preview
 ```
 
 Grafana is ready at http://localhost:3000.
 
 # Run container using docker
 ```
-sudo docker run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -p 3000:3000 pcp-preview
+sudo docker run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -p 3000:3000 quay.io/performancecopilot/pcp-preview
 ```
 
 Grafana is ready at http://localhost:3000.

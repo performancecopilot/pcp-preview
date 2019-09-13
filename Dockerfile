@@ -1,9 +1,9 @@
-ARG PCP_REPO=performancecopilot/pcp
-ARG PCP_VERSION=5c76dea4cd20bbf92a1bfd3ec9505ea3eb32e98d
-ARG GRAFANA_PCP_REPO=performancecopilot/grafana-pcp
-ARG GRAFANA_PCP_VERSION=master
-
 FROM fedora:30
+ENV PCP_REPO=performancecopilot/pcp
+ENV PCP_VERSION=5c76dea4cd20bbf92a1bfd3ec9505ea3eb32e98d
+ENV GRAFANA_PCP_REPO=performancecopilot/grafana-pcp
+ENV GRAFANA_PCP_VERSION=master
+
 RUN dnf -y install \
         pkg-config make gcc flex bison \
         which sudo hostname findutils bc git cppcheck \
