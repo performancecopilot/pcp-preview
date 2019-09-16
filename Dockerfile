@@ -27,17 +27,16 @@ RUN nodejs-yarn install && \
 
 
 FROM fedora:30
-RUN dnf -y install \
-        kmod redis grafana bpftrace
-
 COPY --from=0 /pcp/pcp-*/build/rpm /pcp-rpms
 COPY --from=0 /grafana-pcp/dist /var/lib/grafana/plugins/grafana-pcp
 COPY grafana.ini /etc/grafana/grafana.ini
 COPY datasource.yaml /usr/share/grafana/conf/provisioning/datasources/grafana-pcp.yaml
 COPY grafana-configuration.service /etc/systemd/system
 
-RUN cd /pcp-rpms && \
-    dnf -y install $(ls *.{x86_64,noarch}.rpm) && \
+RUN dnf -y install \
+        kmod redis grafana bpftrace \
+        $(ls /pcp-rpms/*.{x86_64,noarch}.rpm) && \
+    dnf clean all && \
     touch /var/lib/pcp/pmdas/{bcc,bpftrace}/.NeedInstall && \
     systemctl enable redis pmwebd pmproxy grafana-server grafana-configuration
 
