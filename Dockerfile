@@ -1,8 +1,8 @@
 FROM fedora:30
-ENV PCP_REPO=performancecopilot/pcp
-ENV PCP_VERSION=5c76dea4cd20bbf92a1bfd3ec9505ea3eb32e98d
-ENV GRAFANA_PCP_REPO=performancecopilot/grafana-pcp
-ENV GRAFANA_PCP_VERSION=master
+ENV PCP_REPO=https://github.com/performancecopilot/pcp.git
+ENV PCP_VERSION=6ef5c5f6b18a78b072378a3d14e5d95c9003f43b
+ENV GRAFANA_PCP_REPO=https://github.com/performancecopilot/grafana-pcp.git
+ENV GRAFANA_PCP_VERSION=d5d0d5c8bfb943f366e20326d2900dc3b3f7986d
 
 RUN dnf -y install \
         pkg-config make gcc flex bison \
@@ -12,14 +12,15 @@ RUN dnf -y install \
         perl perl-devel perl-generators perl-ExtUtils-MakeMaker \
         python2-devel python3 python3-devel pylint \
         bcc-tools e2fsprogs xfsprogs libmicrohttpd-devel \
+        libuv-devel openssl-devel \
         python2 nodejs-yarn
 
-RUN git clone https://github.com/${PCP_REPO}.git /pcp
+RUN git clone ${PCP_REPO} /pcp
 WORKDIR /pcp
 RUN git checkout ${PCP_VERSION}
 RUN ./Makepkgs --without-qt --without-qt3d --without-manager --with-pmdabpftrace
 
-RUN git clone https://github.com/${GRAFANA_PCP_REPO}.git /grafana-pcp
+RUN git clone ${GRAFANA_PCP_REPO} /grafana-pcp
 WORKDIR /grafana-pcp
 RUN git checkout ${GRAFANA_PCP_VERSION}
 RUN nodejs-yarn install && \
