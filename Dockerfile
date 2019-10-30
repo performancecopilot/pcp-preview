@@ -1,8 +1,8 @@
 FROM fedora:30
 ENV PCP_REPO=https://github.com/performancecopilot/pcp.git
-ENV PCP_VERSION=6ef5c5f6b18a78b072378a3d14e5d95c9003f43b
+ENV PCP_VERSION=a8873f7b52fb5bc67d1690d04b0c6e96ae69d83d
 ENV GRAFANA_PCP_REPO=https://github.com/performancecopilot/grafana-pcp.git
-ENV GRAFANA_PCP_VERSION=d5d0d5c8bfb943f366e20326d2900dc3b3f7986d
+ENV GRAFANA_PCP_VERSION=9b70df041624b988b2c519172498185520c4677d
 
 RUN dnf -y install \
         pkg-config make gcc flex bison \
@@ -35,10 +35,11 @@ COPY datasource.yaml /usr/share/grafana/conf/provisioning/datasources/grafana-pc
 COPY grafana-configuration.service /etc/systemd/system
 
 RUN dnf -y install \
-        kmod redis grafana bpftrace \
+        kmod procps redis grafana bpftrace \
         $(ls /pcp-rpms/*.{x86_64,noarch}.rpm) && \
     dnf clean all && \
     touch /var/lib/pcp/pmdas/{bcc,bpftrace}/.NeedInstall && \
-    systemctl enable redis pmwebd pmproxy grafana-server grafana-configuration
+    systemctl enable redis pmcd pmproxy grafana-server grafana-configuration
 
+COPY bpftrace.conf /var/lib/pcp/pmdas/bpftrace/bpftrace.conf
 CMD ["/usr/sbin/init"]
