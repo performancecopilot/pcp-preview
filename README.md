@@ -1,5 +1,7 @@
 # Performance Co-Pilot Preview Container
 
+[![Docker Repository on Quay](https://quay.io/repository/performancecopilot/pcp-preview/status "Docker Repository on Quay")](https://quay.io/repository/performancecopilot/pcp-preview)
+
 This container contains preview versions of upcoming Performance Co-Pilot features.
 It includes the following components:
 
