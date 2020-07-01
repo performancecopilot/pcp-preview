@@ -29,5 +29,4 @@ EXPOSE 6379
 VOLUME ["/var/lib/grafana"]
 EXPOSE 3000
 
-ENTRYPOINT ["/usr/libexec/container-setup"]
 CMD ["/usr/sbin/init"]

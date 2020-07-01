@@ -20,8 +20,11 @@ sudo -H podman run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/
 ```
 sudo -H docker run -d --privileged -v /lib/modules:/lib/modules:ro -v /usr/src:/usr/src:ro -p 3000:3000 quay.io/performancecopilot/pcp-preview
 ```
+## Services
 
-pmcd is ready at http://localhost:44321
-pmproxy is ready at http://localhost:44322
-Redis is ready at http://localhost:6379
 Grafana is ready at http://localhost:3000
+
+The following services run inside the container and can be exposed by using the `-p` argument on podman/docker run:
+* pmcd is listening on localhost:44321
+* pmproxy is listening on localhost:44322 (HTTP)
+* redis is listening on localhost:6379
